@@ -17,7 +17,7 @@ function App() {
 
     if (prefersReducedMotion) {
       return undefined
-    }
+    
 
     let ticking = false
     const root = document.documentElement
