@@ -1,0 +1,116 @@
+.site-footer {
+  border-top: 1px solid rgba(0, 240, 255, 0.15);
+  background: linear-gradient(135deg, rgba(3, 6, 20, 0.9) 0%, rgba(6, 13, 31, 0.7) 100%);
+  backdrop-filter: blur(16px) saturate(180%);
+  padding: 2rem 0;
+  position: relative;
+}
+
+.site-footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--neon-cyan), var(--neon-magenta), var(--neon-violet), transparent);
+  box-shadow: 0 0 10px var(--glow-cyan);
+}
+
+.footer-grid {
+  display: grid;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.footer-block,
+.footer-centre {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.footer-badge {
+  width: 36px; height: 36px;
+  display: grid;
+  place-items: center;
+  color: var(--neon-cyan);
+  border: 1px solid var(--neon-cyan);
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
+  box-shadow: 0 0 10px var(--glow-cyan);
+  text-shadow: 0 0 8px var(--glow-cyan);
+}
+
+.footer-brand p,
+.footer-brand small { display: block; }
+
+.footer-brand p { color: var(--text); }
+
+.footer-links {
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.footer-links span {
+  color: var(--text-muted);
+}
+
+.footer-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: all var(--dur-fast) ease;
+}
+
+.footer-links a:hover {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 8px var(--glow-cyan);
+}
+
+.footer-centre {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer-centre p {
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+}
+
+.footer-socials {
+  display: flex;
+  gap: 1.2rem;
+  justify-content: center;
+}
+
+.footer-socials a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  transition: all var(--dur-fast) ease;
+}
+
+.footer-socials a:hover {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 8px var(--glow-cyan);
+}
+
+@media (min-width: 768px) {
+  .footer-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .footer-centre { text-align: center; }
+  .footer-links { justify-content: flex-end; }
+}

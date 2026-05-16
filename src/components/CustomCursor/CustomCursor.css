@@ -1,0 +1,72 @@
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  --cursor-x: 0px;
+  --cursor-y: 0px;
+  --cursor-scale: 1;
+  transform: translate3d(var(--cursor-x), var(--cursor-y), 0)
+    translate(-50%, -50%) scale(var(--cursor-scale));
+  transform-origin: center;
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--neon-cyan);
+  box-shadow: 0 0 8px var(--glow-cyan), 0 0 20px var(--glow-cyan);
+  transition: opacity var(--dur-fast) ease;
+}
+
+.cursor-dot.is-pressed {
+  --cursor-scale: 0.5;
+  background: var(--neon-magenta);
+  box-shadow: 0 0 12px var(--glow-magenta), 0 0 30px var(--glow-magenta);
+}
+
+.cursor-ring {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(0, 240, 255, 0.5);
+  box-shadow: 0 0 8px var(--glow-cyan);
+  transition: 
+    border-color var(--dur-fast) ease, 
+    opacity var(--dur-fast) ease,
+    box-shadow var(--dur-fast) ease;
+  mix-blend-mode: screen;
+}
+
+.cursor-ring.is-hovered {
+  border-color: var(--neon-magenta);
+  box-shadow: 0 0 15px var(--glow-magenta), 0 0 30px var(--glow-magenta);
+  --cursor-scale: 2;
+}
+
+/* Cursor trail effect */
+.cursor-trail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9998;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--neon-cyan);
+  opacity: 0.4;
+  transform: translate3d(var(--trail-x, 0px), var(--trail-y, 0px), 0) translate(-50%, -50%);
+  transition: opacity 0.5s ease;
+}
+
+@media (pointer: coarse) {
+  .cursor-dot,
+  .cursor-ring,
+  .cursor-trail {
+    display: none;
+  }
+}

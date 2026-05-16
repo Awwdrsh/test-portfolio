@@ -1,0 +1,200 @@
+.navbar {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 100;
+  padding: 1rem 0;
+  background: linear-gradient(135deg, rgba(3, 6, 20, 0.85) 0%, rgba(6, 13, 31, 0.7) 100%);
+  backdrop-filter: blur(24px) saturate(200%);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
+  border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+  box-shadow:
+    0 1px 0 rgba(0, 240, 255, 0.15),
+    0 8px 40px rgba(0, 0, 0, 0.5);
+  transition: padding var(--dur-med) var(--ease-out-expo), background var(--dur-med) ease;
+  animation: navbarDrop 0.6s var(--ease-out-expo);
+}
+
+.navbar.is-compact {
+  padding: 0.5rem 0;
+  background: linear-gradient(135deg, rgba(3, 6, 20, 0.95) 0%, rgba(6, 13, 31, 0.85) 100%);
+  box-shadow:
+    0 1px 0 rgba(0, 240, 255, 0.2),
+    0 8px 40px rgba(0, 0, 0, 0.6);
+}
+
+.navbar-inner {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* ─── Logo Badge ─── */
+.navbar-badge {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  color: var(--neon-cyan);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  border: 1.5px solid var(--neon-cyan);
+  clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+  transition: all var(--dur-fast) ease;
+  text-shadow: 0 0 10px var(--glow-cyan);
+  box-shadow: 0 0 10px var(--glow-cyan);
+  animation: pulseNeon 3s ease-in-out infinite;
+}
+
+.navbar-badge:hover,
+.navbar-badge:focus {
+  background: var(--neon-cyan);
+  color: var(--bg);
+  text-shadow: none;
+  transform: scale(1.05);
+}
+
+/* ─── Mobile Toggle ─── */
+.navbar-toggle {
+  margin-left: auto;
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  background: transparent;
+  color: var(--neon-cyan);
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  font-size: 1.1rem;
+  transition: all var(--dur-fast) ease;
+  cursor: pointer;
+  clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
+}
+
+.navbar-toggle:hover,
+.navbar-toggle:focus {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 15px var(--glow-cyan);
+  background: rgba(0, 240, 255, 0.05);
+}
+
+/* ─── Navigation Links ─── */
+.navbar-links {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(3, 6, 20, 0.97) 0%, rgba(6, 13, 31, 0.95) 100%);
+  backdrop-filter: blur(20px);
+  display: grid;
+  place-content: center;
+  gap: 1.4rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--dur-med) var(--ease-out-expo), visibility var(--dur-med) ease;
+}
+
+.navbar-links.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.navbar-link {
+  position: relative;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  text-decoration: none;
+  transition: all var(--dur-fast) ease;
+  padding: 0.2em 0;
+}
+
+.navbar-link:hover {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 20px var(--glow-cyan);
+}
+
+.navbar-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-magenta));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-med) var(--ease-out-expo);
+  box-shadow: 0 0 8px var(--glow-cyan);
+}
+
+.navbar-link:hover::after,
+.navbar-link.is-active::after {
+  transform: scaleX(1);
+}
+
+.navbar-link.is-active {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 15px var(--glow-cyan);
+}
+
+/* ─── Status Badge ─── */
+.navbar-status {
+  display: none;
+  border: 1px solid rgba(0, 240, 255, 0.15);
+  padding: 0.5rem 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
+}
+
+.navbar-status.is-active {
+  border-color: rgba(57, 255, 20, 0.4);
+  background: rgba(57, 255, 20, 0.08);
+  color: var(--neon-lime);
+  text-shadow: 0 0 8px rgba(57, 255, 20, 0.4);
+  animation: borderGlow 3s ease-in-out infinite;
+}
+
+@keyframes navbarDrop {
+  from {
+    transform: translateY(-60px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar-toggle {
+    display: none;
+  }
+
+  .navbar-links {
+    position: static;
+    inset: auto;
+    background: transparent;
+    backdrop-filter: none;
+    opacity: 1;
+    visibility: visible;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .navbar-link {
+    font-size: 0.72rem;
+  }
+
+  .navbar-status {
+    display: inline-flex;
+  }
+}

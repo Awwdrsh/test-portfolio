@@ -1,0 +1,74 @@
+/* ═══════════════════════════════════════════════════
+   MARQUEE — Holographic Neon Ribbon
+   ═══════════════════════════════════════════════════ */
+
+.marquee-band {
+  overflow: hidden;
+  background: linear-gradient(90deg, var(--bg) 0%, rgba(0, 240, 255, 0.08) 20%, rgba(255, 0, 170, 0.06) 50%, rgba(0, 240, 255, 0.08) 80%, var(--bg) 100%);
+  border-top: 1px solid rgba(0, 240, 255, 0.3);
+  border-bottom: 1px solid rgba(255, 0, 170, 0.3);
+  position: relative;
+  box-shadow:
+    0 -1px 15px var(--glow-cyan),
+    0 1px 15px var(--glow-magenta);
+}
+
+/* Scanline overlay on marquee */
+.marquee-band::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 50px,
+    rgba(0, 240, 255, 0.03) 50px,
+    rgba(0, 240, 255, 0.03) 100px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marqueeMove 20s linear infinite;
+}
+
+.marquee-band:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 52px;
+  padding: 0 1.3rem;
+  color: var(--neon-cyan);
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px var(--glow-cyan);
+  transition: all var(--dur-fast) ease;
+}
+
+.marquee-item:hover {
+  color: var(--neon-magenta);
+  text-shadow: 0 0 20px var(--glow-magenta);
+}
+
+.marquee-item::after {
+  content: '◆';
+  margin-left: 1.3rem;
+  font-size: 0.5em;
+  color: var(--neon-magenta);
+  text-shadow: 0 0 8px var(--glow-magenta);
+}
+
+@keyframes marqueeMove {
+  from { transform: translateX(0); }
+  to { transform: translateX(-33.33%); }
+}
